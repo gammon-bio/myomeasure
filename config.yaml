@@ -1,0 +1,40 @@
+# Myotube Diameter Measurement - Default Configuration
+# Optimized for 10X MF-20/AF488 fluorescence images
+
+# Preprocessing
+gaussian_sigma: 2.0          # Gaussian blur sigma (~1.3 um at 10X)
+clahe_clip_limit: 3.0        # CLAHE clip limit
+clahe_tile_size: 64          # CLAHE tile size in pixels (~42 um)
+
+# Segmentation - Classical
+adaptive_block_size: 127     # Adaptive threshold neighborhood (~82 um)
+adaptive_c: -5.0             # Threshold offset below local mean
+morph_open_size: 5           # Opening disk radius (~3 um)
+morph_close_size: 15         # Closing disk radius (~10 um)
+
+# Segmentation - Cellpose
+cellpose_model: "cyto2"      # Cellpose model type
+cellpose_diameter: 80        # Approximate object diameter in pixels (~52 um)
+cellpose_flow_threshold: 0.4 # Flow threshold for Cellpose
+
+# Segmentation method: "auto", "cellpose", or "classical"
+method: "auto"
+
+# Object filtering
+min_object_area: 2000        # Minimum area in pixels (~845 um2)
+min_aspect_ratio: 3.0        # Minimum major/minor axis ratio
+min_length_um: 50.0          # Minimum length in microns
+max_circularity: 0.5         # Maximum circularity (4*pi*area/perimeter^2)
+min_solidity: 0.5            # Minimum solidity (area/convex_area)
+
+# Measurement
+num_diameter_samples: 9      # Number of perpendicular measurements (TRUEFAD)
+skeleton_prune_length: 20    # Minimum branch length to keep (pixels, ~13 um)
+
+# Scale
+pixel_size: null             # Microns per pixel (null = try metadata)
+
+# Output
+save_overlay: true           # Generate QC overlay images
+save_summary: true           # Generate summary figure
+verbose: false               # Enable debug logging
