@@ -1,0 +1,20 @@
+Data and figures license — Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+The non-software content in this repository and its associated Zenodo deposit —
+including the manuscript figures, the per-myotube measurement CSVs, the
+supplementary tables, the blinded-rater worksheets, and the deposited microscopy
+images and segmentation masks — is licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0).
+
+You are free to share and adapt this material for any purpose, provided you give
+appropriate credit by citing:
+
+  Gammon CJ, Livingston PD, Jamnick NA, Bonetto A. "MyoMeasure: A new
+  operator-independent pipeline for myotube diameter measurement." (2026).
+  [DOI to be assigned on Zenodo deposit.]
+
+Full license text: https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by/4.0/
+
+(The accompanying software — the myotube/ package and all scripts — is licensed
+separately under the MIT License; see LICENSE.)

@@ -132,7 +132,7 @@ def measure_single_myotube(mask: np.ndarray, label_id: int, config,
     from skimage.measure import regionprops
     props = regionprops(mask.astype(int))
     if props:
-        aspect_ratio = props[0].major_axis_length / max(props[0].minor_axis_length, 1)
+        aspect_ratio = props[0].axis_major_length / max(props[0].axis_minor_length, 1)
     else:
         aspect_ratio = 0
 

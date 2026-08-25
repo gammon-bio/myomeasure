@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use MyoMeasure, please cite both the software and the paper."
+title: "MyoMeasure: A new operator-independent pipeline for myotube diameter measurement"
+abstract: >-
+  An operator-independent, one-command pipeline for myotube diameter
+  measurement in C2C12 cultures, combining Cellpose-SAM segmentation with
+  skeleton-based perpendicular ray-casting (TRUEFAD sampling).
+type: software
+authors:
+  - family-names: Gammon
+    given-names: Caleb J.
+    affiliation: "Department of Pathology, University of Colorado Anschutz Medical Campus"
+  - family-names: Livingston
+    given-names: Patrick D.
+    affiliation: "Department of Pathology, University of Colorado Anschutz Medical Campus"
+  - family-names: Jamnick
+    given-names: Nicholas A.
+    affiliation: "Department of Pathology, University of Colorado Anschutz Medical Campus"
+  - family-names: Bonetto
+    given-names: Andrea
+    affiliation: "Department of Pathology, University of Colorado Anschutz Medical Campus"
+    email: andrea.bonetto@cuanschutz.edu
+    orcid: "https://orcid.org/0000-0002-3235-1871"
+license: MIT
+repository-code: "https://github.com/gammon-bio/myotube_diameter"
+version: "1.0.0"                                       # TODO: confirm release version/tag
+date-released: "2026-05-28"                            # TODO: set to actual release date
+doi: "10.5281/zenodo.XXXXXXX"                           # TODO: fill after Zenodo deposit
+keywords:
+  - myotube morphometry
+  - C2C12
+  - Cellpose-SAM
+  - skeletal muscle
+  - image analysis
+  - reproducibility

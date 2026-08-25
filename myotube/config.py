@@ -27,8 +27,13 @@ class Config:
 
     # Segmentation - Cellpose
     cellpose_model: str = "cyto2"
-    cellpose_diameter: int = 80
-    cellpose_flow_threshold: float = 0.4
+    cellpose_diameter: int = 300
+    cellpose_flow_threshold: float = 0.8
+    cellpose_cellprob_threshold: float = -2.0
+
+    # Fragment merging
+    merge_distance: int = 30
+    merge_angle_threshold: float = 30.0
 
     # Method selection
     method: str = "auto"
@@ -38,7 +43,7 @@ class Config:
     min_aspect_ratio: float = 3.0
     min_length_um: float = 50.0
     max_circularity: float = 0.5
-    min_solidity: float = 0.5
+    min_solidity: float = 0.3
 
     # Measurement
     num_diameter_samples: int = 9
@@ -89,7 +94,7 @@ def load_config(cli_args=None) -> Config:
     config = Config()
 
     # Load YAML if specified or if default config.yaml exists
-    yaml_path = args.config
+    yaml_path = args.config_path
     if yaml_path is None:
         default_yaml = Path(__file__).parent.parent / "config.yaml"
         if default_yaml.exists():

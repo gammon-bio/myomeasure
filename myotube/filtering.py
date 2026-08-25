@@ -37,8 +37,8 @@ def filter_myotubes(labels: np.ndarray, config, pixel_size: float = 1.0) -> np.n
     for prop in props:
         label_id = prop.label
         area = prop.area
-        major = prop.major_axis_length
-        minor = prop.minor_axis_length
+        major = prop.axis_major_length
+        minor = prop.axis_minor_length
         perimeter = prop.perimeter
 
         # Area filter

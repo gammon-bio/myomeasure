@@ -1,8 +1,14 @@
-numpy
-scipy
-scikit-image
-opencv-python-headless
-pandas
-matplotlib
-tifffile
-pyyaml
+# Analysis/pipeline dependencies.
+# Versions below were verified on 2026-05-28 (conda env "cellpose", Python 3.11.15)
+# to reproduce the committed stats CSVs and figures byte-/pixel-identical.
+# See audit/results_audit_c39429b.md. (Cellpose itself: requirements-cellpose.txt.)
+numpy==2.4.3
+scipy==1.17.1
+scikit-image==0.26.0
+opencv-python-headless==4.13.0.92
+pandas==3.0.1
+matplotlib==3.10.8
+tifffile==2026.3.3
+pyyaml==6.0.3
+pingouin==0.6.1          # ICC(3,1) absolute-agreement (compute_pooled_stats.py, reviewer stats)
+openpyxl==3.1.5          # supplementary-table workbook I/O (make_supp_xlsx.py)

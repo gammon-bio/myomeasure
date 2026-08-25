@@ -1,1 +1,4 @@
-cellpose>=3.0
+# Segmentation backend. 4.0.9 is the version used for all results in the paper
+# (cpsam foundation model). Installs PyTorch; on Apple Silicon use gpu=True with
+# no gpu_device argument (see README / STAR Methods).
+cellpose==4.0.9

@@ -1,0 +1,40 @@
+# Keep the build context tiny: only code + config + lock + tests are needed in
+# the image. The two big offenders are archive/ (a committed venv + node_modules)
+# and the data/results/reports trees.
+
+.git
+.gitignore
+.dockerignore
+
+# Heavy / never needed in the image
+archive/
+data/
+results/
+reports/
+audit/
+references.Data/
+references.enl
+zenodo_data/
+scripts/
+
+# Manuscript / docs / reference-manager binaries
+*.docx
+*.pptx
+*.enl
+~$*
+MyoMeasure_treatment_protocol.docx
+
+# OS / editor / Python caches / agent state
+.DS_Store
+**/.DS_Store
+.Rhistory
+**/.Rhistory
+**/__pycache__/
+**/*.pyc
+.pytest_cache/
+.claude/
+
+# Scan outputs / security docs (not needed inside the image)
+scout.json
+scout_all.json
+SECURITY.md

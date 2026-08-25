@@ -70,10 +70,11 @@ def load_image(path: str) -> np.ndarray:
 
 
 def extract_green_channel(img: np.ndarray) -> np.ndarray:
-    """Extract green channel (AF488) from multi-channel image.
+    """Reduce a multi-channel image to a single 2-D intensity channel.
 
-    If grayscale, returns as-is. If RGB, returns channel 1 (green).
-    For multi-channel TIFFs, returns channel 1.
+    The calibrated TIFFs written by convert_vsi_to_tiff are single-channel, so
+    grayscale input is returned unchanged (the usual path). For RGB or other
+    multi-channel inputs, one channel is returned as a fallback.
     """
     if img.ndim == 2:
         return img

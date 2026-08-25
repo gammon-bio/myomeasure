@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myomeasure"
+version = "0.1.0"
+description = "Myotube diameter measurement from fluorescence microscopy (MyoMeasure)."
+readme = "README.md"
+requires-python = "==3.11.*"
+license = { text = "MIT" }
+
+[tool.setuptools]
+packages = ["myotube"]
+
+# Dependencies are owned by environment.yml / conda-lock.yml, not declared here,
+# to avoid double management. `pythonpath = ["."]` puts the repo root on sys.path
+# so `pytest` can import the `myotube` package without an editable install.
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"

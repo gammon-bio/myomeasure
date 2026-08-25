@@ -1,0 +1,137 @@
+# ============================================================================
+# MyoMeasure — .gitignore
+# The repo ships the reproducibility bundle for the paper: code + manuscript +
+# figures + derived CSVs. Raw microscopy images are deposited on Zenodo (the
+# paper-relevant subset) and available on request; everything heavy, regenerable,
+# not used in this paper, or superseded is excluded. See RELEASE_MANIFEST.md.
+# ============================================================================
+
+# --- OS / editor / scratch ---
+.DS_Store
+~$*
+.Rhistory
+**/.Rhistory
+__pycache__/
+*.pyc
+*.bak
+*.bak_*
+
+# --- Never commit: archives, virtualenvs, node deps ---
+archive/
+**/venv/
+**/node_modules/
+
+# --- Raw microscopy data (Zenodo subset / on request) ---
+*.vsi
+/data/
+
+# --- Inference QC artifacts (regenerable; not inputs to stats/figures) ---
+**/*_measurement_overlay.png
+**/*_cp_masks.tif
+**/processing.log
+/results/**/summary.png
+/results/IGF_dexa_combined/*.png
+
+# --- Result trees for experiments not analysed in this paper ---
+/results/Experiment_1_inference/
+/results/Experiment_2_inference/
+/results/c26_cm_inference/
+/results/CAF_C2C12_CM/
+/results/Paul_ConditionMedia/
+/results/Paul_Hypertrophy/
+/results/IGF_dexa_plate005/*
+!/results/IGF_dexa_plate005/measurements.csv
+/results/IGF_dexa/*
+!/results/IGF_dexa/measurements.csv
+/results/c26_cm_exp2_inference/*
+!/results/c26_cm_exp2_inference/measurements.csv
+
+# --- Superseded manuscript drafts / figure decks (keep only the current set) ---
+/reports/cell_reports_methods_paper.*
+/reports/cell_reports_methods_paper_v3*
+/reports/cell_reports_methods_paper_CG.docx
+/reports/star_protocols_*
+/reports/Figures.pptx
+/reports/Supplementary_info.docx
+/reports/Presubmission_inquiry_*
+/reports/validation_report*.html
+/reports/normality_per_image.csv
+/reports/figures/
+/reports/figures_v2/
+/reports/paper_v3_stats/
+/reports/final-methods/
+/reports/**/test/
+/reports/stats_final/Supplementary_tables_generated.xlsx
+
+# --- Manuscript + figure deck: held back until their embedded revision history /
+#     superseded slides are cleared (accept-all-changes; remove old slides), so nothing
+#     unintended enters git history. Un-ignore and add before the public push.
+#     See RELEASE_MANIFEST.md, "Open items". ---
+/reports/cell_reports_methods_paper_CG_AB.docx
+/reports/Figures_AB.pptx
+
+# --- Not needed to run the pipeline or for the manuscript ---
+# Legends ship as Markdown (.md); these .docx are pandoc duplicates.
+/reports/figures_final/figure_legends.docx
+/reports/stats_final/supplementary_table_legends.docx
+# Lab SOP, not part of the pipeline or manuscript.
+/MyoMeasure_treatment_protocol.docx
+# Uncited extended analyses (not reported in the manuscript).
+/results/IGF_dexa_combined/extended_stats.py
+/results/IGF_dexa_combined/combined_hill_fit.csv
+/results/IGF_dexa_combined/combined_log_dose_regression.csv
+
+# --- Internal QA notes (kept local, not part of the public release) ---
+/audit/
+
+# --- Scripts: ship only the final paper pipeline + the Zenodo stager ---
+/scripts/*
+!/scripts/paper_scripts_final/
+!/scripts/stage_zenodo_data.sh
+/scripts/paper_scripts_final/__pycache__/
+
+# --- Phantom test suite (committed); ignore only caches ---
+/tests/__pycache__/
+/tests/.pytest_cache/
+
+# Zenodo staging output (built by scripts/stage_zenodo_data.sh)
+/zenodo_data/
+
+# Docker Scout SARIF scan outputs (large, regenerable; summarized in SECURITY.md)
+/scout.json
+/scout_all.json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Repo scope (set 2026-08-25): this repository ships the PIPELINE and the
+# analysis CODE only. It does not ship outputs or data.
+#   * Figures, supplementary tables, legends and manuscript bookkeeping -> not
+#     distributed here; they belong to the paper.
+#   * Raw and derived data (measurements.csv, per-rater worksheets, stat CSVs)
+#     -> Zenodo deposit. Stage it with scripts/stage_zenodo_data.sh.
+# Analysis scripts (scripts/paper_scripts_final/, results/*/make_figures.py,
+# myomeasure/) ARE tracked, so every figure and statistic remains inspectable
+# and re-runnable once the Zenodo data is in place.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Manuscript outputs: figures, supplementary tables, legends
+/reports/
+
+# Data: raw per-myotube measurements and derived statistics -> Zenodo
+/results/**/measurements.csv
+/results/**/group_summary.csv
+/results/IGF_dexa_combined/*.csv
+/data/subset_blinded_validation/
+
+# Keep the analysis scripts that live alongside the data
+!/results/IGF_dexa_combined/make_figures.py
+
+# Manuscript-revision bookkeeping (local only)
+/NUMBERS_CHANGED.md
+/PROSE_UPDATES_*.md
+/RELEASE_MANIFEST.md
+/check_figure_typography.py
+/reports/_legend_backups_*/
+/results/**/_archive_*/
+
+# Figure-style helper package: ship the code, not the caches
+/myomeasure/__pycache__/
