@@ -18,6 +18,16 @@
 #   docker buildx imagetools inspect condaforge/miniforge3:25.3.1-0 --format '{{.Manifest.Digest}}'
 FROM condaforge/miniforge3@sha256:1e65803d646bf8503728001dddb5756f3e8235e0883c19b5a5ad1da85cff0905
 
+# OCI metadata. `image.source` is what links the published package back to the
+# repository on GitHub Container Registry, so the package page shows the README
+# and the provenance automatically.
+LABEL org.opencontainers.image.title="MyoMeasure" \
+      org.opencontainers.image.description="Operator-independent C2C12 myotube diameter measurement: Cellpose-SAM segmentation with skeleton-based perpendicular ray-casting." \
+      org.opencontainers.image.source="https://github.com/gammon-bio/myotube_diameter" \
+      org.opencontainers.image.documentation="https://github.com/gammon-bio/myotube_diameter#readme" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.vendor="Bonetto Lab, University of Colorado Anschutz"
+
 # 0. OS security hardening (bucket A). Patch the FIXABLE Ubuntu 'noble' CVEs by
 #    upgrading ONLY the CVE-affected apt packages (from `docker scout cves`,
 #    package type = deb, fixable) to their pinned noble-security versions. The
@@ -61,8 +71,17 @@ RUN conda-lock install --mamba --name myomeasure conda-lock.yml && mamba clean -
 SHELL ["conda", "run", "--no-capture-output", "-n", "myomeasure", "/bin/bash", "-c"]
 ENV JAVA_HOME=/opt/conda/envs/myomeasure
 
-# 4. Project code (build context trimmed by .dockerignore).
-COPY . /app
+# 4. Project code -- an explicit ALLOWLIST, not `COPY . /app`.
+#    The image ships the measurement pipeline and nothing else: no paper
+#    analysis scripts, no manuscript material, no data. An allowlist cannot
+#    silently absorb new files the way a blanket copy plus .dockerignore
+#    blacklist can (that is how NUMBERS_CHANGED.md ended up in the 2026-07-01
+#    build). .dockerignore is kept as defence in depth.
+COPY myotube/ /app/myotube/
+COPY tests/ /app/tests/
+COPY run_inference.py measure_from_masks.py convert_vsi_to_tiff.py /app/
+COPY config.yaml pyproject.toml /app/
+COPY README.md LICENSE LICENSE-data CITATION.cff /app/
 
 # 5. Pre-bake the Bio-Formats Java library (ome:formats-gpl:6.7.0, pinned by
 #    bioio-bioformats==1.3.2) into ~/.jgo + ~/.m2 + ~/.cache/cjdk so VSI

@@ -38,3 +38,11 @@ MyoMeasure_treatment_protocol.docx
 scout.json
 scout_all.json
 SECURITY.md
+
+# --- Defence in depth: never let manuscript or analysis material into the image.
+#     The Dockerfile now uses an explicit COPY allowlist, so these are a backstop.
+myomeasure/
+NUMBERS_CHANGED.md
+PROSE_UPDATES_*.md
+RELEASE_MANIFEST.md
+check_figure_typography.py
