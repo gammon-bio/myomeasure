@@ -2,7 +2,12 @@
 
 A Python pipeline for automated segmentation and diameter measurement of myotubes in fluorescence microscopy images. Uses [Cellpose](https://github.com/MouseLand/cellpose) for instance segmentation and a skeleton-based perpendicular ray-casting method for diameter quantification.
 
-Developed in the [Bonetto Lab](https://medschool.cuanschutz.edu/pathology), Department of Pathology, University of Colorado Anschutz Medical Campus.
+Developed in the [Bonetto Lab](https://www.bonettolab.org/), Department of Pathology, University of Colorado Anschutz Medical Campus.
+
+![Raw fluorescence field on the left; the same field measured by the pipeline on the right, showing filtered myotube masks, medial-axis skeletons, nine-point perpendicular measurement chords and per-myotube mean diameters.](docs/pipeline_example.jpg)
+
+**Left:** a raw MF-20 / AF647 fluorescence field of differentiated C2C12 myotubes (10X widefield, false-coloured red). Scale bar, 100 µm.
+**Right:** the same field after `run_inference.py` — morphologically filtered myotube masks (coloured contours), the medial-axis skeleton with nine perpendicular measurement chords per myotube (yellow), and the resulting mean diameter labelled on each object. Every number in the output CSV comes from these measurements.
 
 ## Overview
 
