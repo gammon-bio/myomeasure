@@ -27,8 +27,8 @@ LABEL org.opencontainers.image.title="MyoMeasure" \
       org.opencontainers.image.version="1.0.0" \
       org.opencontainers.image.ref.name="myomeasure" \
       org.opencontainers.image.description="Operator-independent C2C12 myotube diameter measurement: Cellpose-SAM segmentation with skeleton-based perpendicular ray-casting." \
-      org.opencontainers.image.source="https://github.com/gammon-bio/myotube_diameter" \
-      org.opencontainers.image.documentation="https://github.com/gammon-bio/myotube_diameter#readme" \
+      org.opencontainers.image.source="https://github.com/gammon-bio/myomeasure" \
+      org.opencontainers.image.documentation="https://github.com/gammon-bio/myomeasure#readme" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.vendor="Bonetto Lab, University of Colorado Anschutz"
 

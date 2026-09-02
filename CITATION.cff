@@ -22,7 +22,7 @@ authors:
     email: andrea.bonetto@cuanschutz.edu
     orcid: "https://orcid.org/0000-0002-3235-1871"
 license: MIT
-repository-code: "https://github.com/gammon-bio/myotube_diameter"
+repository-code: "https://github.com/gammon-bio/myomeasure"
 version: "1.0.0"                                       # TODO: confirm release version/tag
 date-released: "2026-05-28"                            # TODO: set to actual release date
 doi: "10.5281/zenodo.XXXXXXX"                           # TODO: fill after Zenodo deposit

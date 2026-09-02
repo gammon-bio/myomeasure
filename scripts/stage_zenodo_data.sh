@@ -97,7 +97,7 @@ then run, from the repository root:
   python scripts/paper_scripts_final/make_all_figures.py
   python scripts/paper_scripts_final/make_supp_xlsx.py
 
-Analysis code: https://github.com/gammon-bio/myotube_diameter
+Analysis code: https://github.com/gammon-bio/myomeasure
 TXT
 
 ( cd "$OUT" && find . -type f \( -name '*.tif' -o -name '*.xlsx' -o -name '*.csv' \) -print0 \
