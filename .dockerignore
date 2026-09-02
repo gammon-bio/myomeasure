@@ -20,9 +20,9 @@ scripts/
 # Manuscript / docs / reference-manager binaries
 *.docx
 *.pptx
+*.xlsx
 *.enl
 ~$*
-MyoMeasure_treatment_protocol.docx
 
 # OS / editor / Python caches / agent state
 .DS_Store
@@ -40,9 +40,9 @@ scout_all.json
 SECURITY.md
 
 # --- Defence in depth: never let manuscript or analysis material into the image.
-#     The Dockerfile now uses an explicit COPY allowlist, so these are a backstop.
+#     The Dockerfile uses an explicit COPY allowlist, so this is only a backstop.
+#     Excluding every .md but the README covers all local revision bookkeeping
+#     without having to enumerate (and thereby publish) their filenames.
+*.md
+!README.md
 myomeasure/
-NUMBERS_CHANGED.md
-PROSE_UPDATES_*.md
-RELEASE_MANIFEST.md
-check_figure_typography.py

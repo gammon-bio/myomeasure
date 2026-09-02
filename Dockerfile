@@ -21,7 +21,11 @@ FROM condaforge/miniforge3@sha256:1e65803d646bf8503728001dddb5756f3e8235e0883c19
 # OCI metadata. `image.source` is what links the published package back to the
 # repository on GitHub Container Registry, so the package page shows the README
 # and the provenance automatically.
+# `version` and `ref.name` are set explicitly: otherwise the image inherits
+# condaforge/miniforge3's values and advertises itself as "ubuntu 24.04".
 LABEL org.opencontainers.image.title="MyoMeasure" \
+      org.opencontainers.image.version="1.0.0" \
+      org.opencontainers.image.ref.name="myomeasure" \
       org.opencontainers.image.description="Operator-independent C2C12 myotube diameter measurement: Cellpose-SAM segmentation with skeleton-based perpendicular ray-casting." \
       org.opencontainers.image.source="https://github.com/gammon-bio/myotube_diameter" \
       org.opencontainers.image.documentation="https://github.com/gammon-bio/myotube_diameter#readme" \
@@ -33,26 +37,27 @@ LABEL org.opencontainers.image.title="MyoMeasure" \
 #    package type = deb, fixable) to their pinned noble-security versions. The
 #    base image stays digest-pinned above; this layer applies the OS patches on
 #    top of it. Version pins track the noble-security pocket at scan time and
-#    should be refreshed when re-scanning (see SECURITY.md). All other findings
-#    are in the pinned scientific/JVM stack (bucket B) or are unfixable/
-#    unreachable (bucket C); those are documented in SECURITY.md, not modified.
+#    should be refreshed when re-scanning (see SECURITY.md); last refreshed
+#    2026-09-01. All other findings are in the pinned scientific/JVM stack
+#    (bucket B) or are unfixable/unreachable (bucket C); those are documented
+#    in SECURITY.md, not modified.
 RUN apt-get update && \
     apt-get install -y --only-upgrade --no-install-recommends \
-    libc6=2.39-0ubuntu8.7 libc-bin=2.39-0ubuntu8.7 \
-    openssl=3.0.13-0ubuntu3.11 libssl3t64=3.0.13-0ubuntu3.11 \
-    libgnutls30t64=3.8.3-1.1ubuntu3.6 libgcrypt20=1.10.3-2ubuntu0.1 \
-    libtasn1-6=4.19.0-3ubuntu0.24.04.2 libssh-4=0.10.6-2ubuntu0.4 \
-    libnghttp2-14=1.59.0-1ubuntu0.3 libcurl3t64-gnutls=8.5.0-2ubuntu10.10 \
+    libc6=2.39-0ubuntu8.8 libc-bin=2.39-0ubuntu8.8 \
+    openssl=3.0.13-0ubuntu3.15 libssl3t64=3.0.13-0ubuntu3.15 \
+    libgnutls30t64=3.8.3-1.1ubuntu3.6 libgcrypt20=1.10.3-2ubuntu0.2 \
+    libtasn1-6=4.19.0-3ubuntu0.24.04.2 libssh-4=0.10.6-2ubuntu0.5 \
+    libnghttp2-14=1.59.0-1ubuntu0.4 libcurl3t64-gnutls=8.5.0-2ubuntu10.13 \
     libexpat1=2.6.1-2ubuntu0.4 liblzma5=5.6.1+really5.4.5-1ubuntu0.3 \
     libcap2=1:2.66-5ubuntu2.4 gpgv=2.4.4-2ubuntu17.4 \
-    libsystemd0=255.4-1ubuntu8.16 libudev1=255.4-1ubuntu8.16 \
-    dpkg=1.22.6ubuntu6.6 tar=1.35+dfsg-3ubuntu0.1 sed=4.9-2ubuntu0.24.04.1 \
-    perl=5.38.2-3.2ubuntu0.3 perl-base=5.38.2-3.2ubuntu0.3 \
-    perl-modules-5.38=5.38.2-3.2ubuntu0.3 libperl5.38t64=5.38.2-3.2ubuntu0.3 \
-    util-linux=2.39.3-9ubuntu6.5 bsdutils=1:2.39.3-9ubuntu6.5 \
-    mount=2.39.3-9ubuntu6.5 libmount1=2.39.3-9ubuntu6.5 \
-    libblkid1=2.39.3-9ubuntu6.5 libsmartcols1=2.39.3-9ubuntu6.5 \
-    libuuid1=2.39.3-9ubuntu6.5 && \
+    libsystemd0=255.4-1ubuntu8.17 libudev1=255.4-1ubuntu8.17 \
+    dpkg=1.22.6ubuntu6.6 tar=1.35+dfsg-3ubuntu0.4 sed=4.9-2ubuntu0.24.04.1 \
+    perl=5.38.2-3.2ubuntu0.4 perl-base=5.38.2-3.2ubuntu0.4 \
+    perl-modules-5.38=5.38.2-3.2ubuntu0.4 libperl5.38t64=5.38.2-3.2ubuntu0.4 \
+    util-linux=2.39.3-9ubuntu6.6 bsdutils=1:2.39.3-9ubuntu6.6 \
+    mount=2.39.3-9ubuntu6.6 libmount1=2.39.3-9ubuntu6.6 \
+    libblkid1=2.39.3-9ubuntu6.6 libsmartcols1=2.39.3-9ubuntu6.6 \
+    libuuid1=2.39.3-9ubuntu6.6 && \
     rm -rf /var/lib/apt/lists/*
 
 # 1. Put conda-lock in the base env (conda-forge only, matching the dev setup).
