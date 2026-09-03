@@ -1,0 +1,47 @@
+name: Tests
+
+# The synthetic-phantom suite is the same gate the container build runs
+# (`RUN pytest tests/ -q` in the Dockerfile), so a green run here means the
+# image would build.
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  phantom-tests:
+    name: Synthetic phantom suite (Python 3.11)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # The phantom tests build their tubes in memory and import only
+      # myotube.{config,filtering,measurement} -- no Cellpose, no PyTorch, no
+      # image I/O. Installing just those dependencies keeps the run to about a
+      # minute; versions match the pins in requirements.txt, which are the ones
+      # verified to reproduce the published numbers.
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install \
+            numpy==2.4.3 \
+            scipy==1.17.1 \
+            scikit-image==0.26.0 \
+            pyyaml==6.0.3 \
+            pytest==9.1.1
+
+      - name: Run the phantom suite
+        run: pytest tests/ -q

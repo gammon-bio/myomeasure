@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "myomeasure"
-version = "0.1.0"
+version = "1.0.0"
 description = "Myotube diameter measurement from fluorescence microscopy (MyoMeasure)."
 readme = "README.md"
 requires-python = "==3.11.*"
